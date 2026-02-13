@@ -1,0 +1,178 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Vitality+ – Stimulus</title><link rel="stylesheet" href="./assets/styles.css"></head>
+<body>
+<div class="navbar"><div class="container">
+
+<div class="card" style="margin-bottom:16px; overflow:hidden;">
+  <div class="cardpad" style="padding:18px 22px; background:linear-gradient(135deg, rgba(59,130,246,.12), rgba(34,197,94,.10));">
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;">
+      <div>
+        <div style="font-weight:950;font-size:14px;color:#0b1220;letter-spacing:-.01em;">Vitality+ Beta</div>
+        <div style="color:#475569;font-weight:700;margin-top:4px;">Website flow for participants</div>
+      </div>
+      <div style="width:46px;height:46px;border-radius:18px;border:1px solid rgba(15,23,42,.10);background:rgba(255,255,255,.75);display:flex;align-items:center;justify-content:center;">
+        <span style="font-weight:950;color:#0b1220;">V+</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="navinner">
+  <div class="brandX"><span class="brandmark"></span><span class="brandname">Vitality+</span></div>
+  <div class="navlinks"><span>Dashboard</span><span>Profile</span><span>Settings</span></div>
+</div></div></div>
+<div class="page"><div class="container"><div id="mount"></div>
+<div style="margin-top:18px;display:flex;gap:12px;">
+<button class="btnGhost" id="backBtn" type="button">Back</button>
+<button class="btnPrimary" id="nextBtn" type="button">Next</button>
+</div>
+<script src="./assets/utils.js"></script>
+<script>
+const c=(qs("c","High")==="Low")?"Low":"High";
+const t=(qs("t","High")==="Low")?"Low":"High";
+let step=parseInt(qs("step","1"),10); if(isNaN(step)||step<1||step>3) step=1;
+const mount=document.getElementById("mount");
+const nextBtn=document.getElementById("nextBtn");
+const backBtn=document.getElementById("backBtn");
+
+const P1="<div class=\"topPills\">\n  <div class=\"pillBtn\">Track Activity</div>\n  <div class=\"pillBtn\">Log Nutrition</div>\n  <div class=\"pillBtn\">Set Goals</div>\n  <div class=\"pillBtn\">Log Sleep</div>\n  <div class=\"pillBtn\">Mental Wellness</div>\n</div>\n\n<div class=\"h2x\" style=\"margin:18px 0 12px 0;\">Daily Overview</div>\n<div class=\"grid4\">\n  <div class=\"statCard\"><div class=\"statIco\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M7 20c2-3 3-5 3-8s-1-5-3-8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M17 20c-2-3-3-5-3-8s1-5 3-8\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg></div><b>Daily Steps</b><span>&nbsp;</span></div>\n  <div class=\"statCard\"><div class=\"statIco\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M12 2s6 7 6 12a6 6 0 0 1-12 0c0-5 6-12 6-12z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"/></svg></div><b>Water Intake</b><span>&nbsp;</span></div>\n  <div class=\"statCard\"><div class=\"statIco\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M21 12.8A8.5 8.5 0 1 1 11.2 3a6.5 6.5 0 0 0 9.8 9.8z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"/></svg></div><b>Sleep</b><span>&nbsp;</span></div>\n  <div class=\"statCard\"><div class=\"statIco\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M13 3l-1 9 8 2-11 7 1-9-8-2 11-7z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"/></svg></div><b>Activity</b><span>&nbsp;</span></div>\n</div>\n\n<div class=\"h2x\" style=\"margin:22px 0 12px 0;\">Health Metrics</div>\n<div class=\"grid4\" style=\"grid-template-columns:repeat(3,1fr);\">\n  <div class=\"statCard\"><div class=\"statIco\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linejoin=\"round\"/></svg></div><b>Heart Rate</b><span>&nbsp;</span></div>\n  <div class=\"statCard\"><div class=\"statIco\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M8 12a4 4 0 0 0 8 0\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M9 9h.01M15 9h.01\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\"/></svg></div><b>Mood</b><span>&nbsp;</span></div>\n  <div class=\"statCard\"><div class=\"statIco\"><svg viewBox=\"0 0 24 24\" fill=\"none\"><path d=\"M4 20c3-2 5-6 8-6s5 4 8 6\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M12 14V4\" stroke=\"currentColor\" stroke-width=\"2\"/></svg></div><b>Stress</b><span>&nbsp;</span></div>\n</div>";
+const P2H="<div class=\"card\"><div class=\"cardpad\"><div style=\"display:flex;align-items:center;gap:10px;\"><span class=\"brandmark\" style=\"border-color:var(--accent1)\"></span><div class=\"h2x\">Privacy Settings</div></div><div class=\"px\" style=\"margin-top:10px;\"><b>Review the privacy settings below.</b> If controls are available, you may adjust them.</div></div></div><div class=\"card\" style=\"margin-top:16px;\"><div class=\"cardpad\"><div class=\"trow \" style=\"margin-top:10px;\"><div><b>Access Control <span class=\"infoDot\">i</span></b><div class=\"desc\" style=\"margin-top:8px;\">Password protection and authentication</div></div><div class=\"toggle off\" role=\"switch\" aria-checked=\"false\" tabindex=\"0\"></div></div><div class=\"trow \" style=\"\"><div><b>Data Lifecycle <span class=\"infoDot\">i</span></b><div class=\"desc\" style=\"margin-top:8px;\">Data retention and backup settings</div></div><div class=\"toggle off\" role=\"switch\" aria-checked=\"false\" tabindex=\"0\"></div></div><div class=\"trow \" style=\"\"><div><b>Sharing Privacy <span class=\"infoDot\">i</span></b><div class=\"desc\" style=\"margin-top:8px;\">Profile visibility and sharing controls</div></div><div class=\"toggle off\" role=\"switch\" aria-checked=\"false\" tabindex=\"0\"></div></div><div class=\"trow \" style=\"\"><div><b>Notification Privacy <span class=\"infoDot\">i</span></b><div class=\"desc\" style=\"margin-top:8px;\">Notification content and preview settings</div></div><div class=\"toggle off\" role=\"switch\" aria-checked=\"false\" tabindex=\"0\"></div></div><div class=\"trow \" style=\"\"><div><b>Device Security <span class=\"infoDot\">i</span></b><div class=\"desc\" style=\"margin-top:8px;\">Device authentication and protection</div></div><div class=\"toggle off\" role=\"switch\" aria-checked=\"false\" tabindex=\"0\"></div></div><div class=\"trow \" style=\"\"><div><b>Advanced Features <span class=\"infoDot\">i</span></b><div class=\"desc\" style=\"margin-top:8px;\">Enhanced privacy and security options</div></div><div class=\"toggle off\" role=\"switch\" aria-checked=\"false\" tabindex=\"0\"></div></div></div></div>";
+const P2L="<div class=\"card\"><div class=\"cardpad\"><div style=\"display:flex;align-items:center;gap:10px;\"><span class=\"brandmark\" style=\"border-color:var(--accent1)\"></span><div class=\"h2x\">Privacy Settings</div></div><div class=\"px\" style=\"margin-top:10px;\"><b>Review the privacy settings below.</b> If controls are available, you may adjust them.</div><div class=\"px\" style=\"margin-top:10px;\">Default privacy settings are enabled.</div></div></div><div class=\"card\" style=\"margin-top:16px;\"><div class=\"cardpad\"><div style=\"margin-top:4px;\"><div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Access Control</b><span>Password protection and authentication</span></div></div><div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Data Lifecycle</b><span>Data retention and backup settings</span></div></div><div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Sharing Privacy</b><span>Profile visibility and sharing controls</span></div></div><div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Notification Privacy</b><span>Notification content and preview settings</span></div></div><div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Device Security</b><span>Device authentication and protection</span></div></div><div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Advanced Features</b><span>Enhanced privacy and security options</span></div></div></div></div></div>";
+// High transparency privacy pledge: clearly explains what data we collect, how it is used, and how it may be shared.
+const P3H="<div style=\"text-align:center;margin:20px 0 22px 0;\"><div class=\"h1x\" style=\"font-size:40px;\">Vitality's Privacy Pledge</div><div class=\"px\" style=\"max-width:760px;margin:16px auto 0 auto;color:#334155;\">Vitality collects hydration, activity, and location data to provide personalized wellness insights and recommendations. We want you to know exactly how your data is used and who may have access to it.</div></div><div class=\"card\" style=\"max-width:820px;margin:0 auto;\"><div class=\"cardpad\">\n<div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Data Security</b><span>We collect hydration, activity, and location data that you record through Vitality+. All data is encrypted with enterprise\u2011grade protocols and stored on secure servers.</span></div></div>\n<div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>How We Use Your Data</b><span>Your data helps us generate personalized health metrics, deliver tailored reminders, and improve the app’s features. You can view, update, or delete your data at any time via your dashboard.</span></div></div>\n<div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Sharing & Privacy</b><span>We never sell your personal information. We may share anonymized, aggregated data with research partners to improve health outcomes, but your identifiable information remains private. Private Mode keeps your activity completely anonymous.</span></div></div>\n<div style=\"text-align:center;color:var(--muted);font-size:12.5px;margin-top:22px;\">For more information about our privacy features, visit our help center.</div>\n</div></div>";
+// Low transparency privacy pledge: provides only minimal information without specifying data uses or sharing.
+const P3L="<div style=\"text-align:center;margin:20px 0 22px 0;\"><div class=\"h1x\" style=\"font-size:40px;\">Vitality's Privacy Pledge</div></div><div class=\"card\" style=\"max-width:820px;margin:0 auto;\"><div class=\"cardpad\">\n<div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Data Security</b><span>Your data is stored securely.</span></div></div>\n<div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>How We Use Your Data</b><span>You can manage or delete your data anytime from the settings.</span></div></div>\n<div class=\"rowline\"><div class=\"icoCircle\"></div><div class=\"rowtxt\"><b>Sharing &amp; Privacy</b><span>Use Private Mode to browse anonymously.</span></div></div>\n<div style=\"text-align:center;color:var(--muted);font-size:12.5px;margin-top:22px;\">For more information about our privacy features, visit our help center.</div>\n</div></div>";
+
+function render(){
+  if(step===1){mount.innerHTML=P1; backBtn.style.visibility="hidden"; nextBtn.textContent="Next";}
+  if(step===2){
+    mount.innerHTML=(c==="High")?P2H:P2L;
+    if(c==="High"){
+      bindToggles();
+      // update descriptions for high-customization toggles
+      adjustP2H();
+    } else {
+      // update descriptions for low-customization list
+      adjustP2L();
+    }
+    backBtn.style.visibility="visible";
+    nextBtn.textContent="Next";
+  }
+  if(step===3){
+    // inject the privacy pledge content based on transparency level
+    mount.innerHTML=(t==="High")?P3H:P3L;
+    // microcopy for the privacy pledge is uniform across transparency conditions
+    backBtn.style.visibility="visible";
+    nextBtn.textContent="Continue to Blog";
+  }
+}
+function nav(toStep){
+  const u=new URL(window.location.href);
+  u.searchParams.set("c",c); u.searchParams.set("t",t); u.searchParams.set("step",String(toStep));
+  window.location.href = u.pathname.replace(/.*\//,"")+"?"+u.searchParams.toString();
+}
+nextBtn.addEventListener("click",()=>{ if(step===3){ window.location.href="./blog.html?c="+encodeURIComponent(c)+"&t="+encodeURIComponent(t); return;} nav(step+1); });
+backBtn.addEventListener("click",()=>{ if(step>1) nav(step-1); });
+
+  function showToast(msg){
+    let t = document.querySelector('.toast');
+    if(!t){
+      t = document.createElement('div');
+      t.className = 'toast';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg || 'Saved';
+    t.classList.add('show');
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(()=>t.classList.remove('show'), 1200);
+  }
+
+  function bindToggles(){
+    // only exists in high customization privacy page
+    document.querySelectorAll('.toggle').forEach(el=>{
+      // ensure off default
+      if(!el.classList.contains('on')) el.classList.add('off');
+      const toggle = ()=>{
+        el.classList.toggle('on');
+        el.classList.toggle('off');
+        el.setAttribute('aria-checked', el.classList.contains('on') ? 'true' : 'false');
+        showToast('Saved');
+      };
+      el.addEventListener('click', toggle);
+      el.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggle(); }});
+    });
+  }
+
+  // Provide detailed explanations for each toggle in high-customization privacy settings.
+  function adjustP2H(){
+    const descs = document.querySelectorAll('.desc');
+    // Detailed microcopy aligned with best practices: explains effects of enabling/disabling.
+    const microcopy = [
+      'Requires strong password and two-factor authentication to access your account.',
+      'Controls whether old data is automatically deleted after six months or retained indefinitely.',
+      'Manages whether your profile and de-identified activity are visible to others or kept private.',
+      'Decides if notifications include detailed previews or just indicate there\'s an update.',
+      'Requires device-level authentication (e.g., fingerprint) before opening the app.',
+      'Provides additional tools like private mode and auto-delete for extra privacy.'
+    ];
+    // Remove any inline font-size styles on toggle headings and descriptions so CSS overrides can apply consistently
+    document.querySelectorAll('.trow b').forEach(el => {
+      el.removeAttribute('style');
+    });
+    document.querySelectorAll('.desc').forEach(el => {
+      el.removeAttribute('style');
+    });
+    // Apply our descriptive text to each toggle description
+    descs.forEach((el, idx) => {
+      if(microcopy[idx]) el.textContent = microcopy[idx];
+    });
+    // Add tooltips on info dots to explain what each toggle controls
+    document.querySelectorAll('.infoDot').forEach((dot, idx) => {
+      if(microcopy[idx]) dot.setAttribute('title', microcopy[idx]);
+    });
+  }
+
+  // Adjust descriptions for low-customization privacy settings (static list) to provide clearer explanations.
+  function adjustP2L(){
+    // Each rowtxt spans across Data Lifecycle etc. We map by title to new microcopy.
+    document.querySelectorAll('.rowtxt').forEach(row => {
+      const titleEl = row.querySelector('b');
+      const descEl  = row.querySelector('span');
+      if(!titleEl || !descEl) return;
+      const title = titleEl.textContent.trim();
+      if(title === 'Access Control'){
+        descEl.textContent = 'Requires strong password and two-factor authentication to access your account.';
+      } else if(title === 'Data Lifecycle'){
+        descEl.textContent = 'Controls whether old data is automatically deleted after six months or retained indefinitely.';
+      } else if(title === 'Sharing Privacy'){
+        descEl.textContent = 'Manages whether your profile and de-identified activity are visible to others or kept private.';
+      } else if(title === 'Notification Privacy'){
+        descEl.textContent = 'Decides if notifications include detailed previews or just indicate there\'s an update.';
+      } else if(title === 'Device Security'){
+        descEl.textContent = 'Requires device-level authentication (e.g., fingerprint) before opening the app.';
+      } else if(title === 'Advanced Features'){
+        descEl.textContent = 'Provides additional tools like private mode and auto-delete for extra privacy.';
+      }
+    });
+  }
+
+  // Adjust the text in the low-transparency privacy pledge to provide more explanation.
+  function adjustP3L(){
+    document.querySelectorAll('.rowtxt').forEach(row=>{
+      const titleEl = row.querySelector('b');
+      const descEl  = row.querySelector('span');
+      if(!titleEl || !descEl) return;
+      const title = titleEl.textContent.trim();
+      if(title === 'Data Security'){
+        descEl.textContent = 'Your data is encrypted with industry-standard protocols and stored on secure servers.';
+      } else if(title === 'How We Use Your Data'){
+        descEl.textContent = 'You can access, view, update, or delete your data at any time from the settings page.';
+      } else if(title === 'Sharing & Privacy'){
+        descEl.textContent = 'Private Mode ensures that none of your activity is stored or analyzed during your session, keeping your usage completely anonymous.';
+      }
+    });
+  }
+
+render();
+</script>
+</div></div></body></html>

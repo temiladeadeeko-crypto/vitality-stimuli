@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wellness Daily – Article</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+  <style>
+    .blogWrap{max-width:1100px;margin:0 auto;padding:26px 20px 64px 20px;}
+    .blogTop{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 0;
+    }
+    .blogBrand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:-.02em;}
+    .blogDot{width:10px;height:10px;border-radius:999px;background:linear-gradient(135deg, var(--accent2), var(--accent1));}
+    .blogNav{display:flex;gap:16px;flex-wrap:wrap;color:var(--muted);font-weight:850;font-size:13px;}
+    .blogNav a{text-decoration:none;color:inherit;padding:8px 10px;border-radius:12px;border:1px solid transparent}
+    .blogNav a:hover{border-color:rgba(15,23,42,.10);background:rgba(255,255,255,.55)}
+    .layout{display:grid;grid-template-columns:1.55fr .85fr;gap:18px;align-items:start;}
+    @media (max-width: 980px){.layout{grid-template-columns:1fr}}
+    .articleCard{border-radius:24px;overflow:hidden;}
+    .hero{
+      height:220px;
+      background:
+        radial-gradient(700px 280px at 20% 0%, rgba(59,130,246,.35), transparent 55%),
+        radial-gradient(700px 280px at 80% 10%, rgba(34,197,94,.25), transparent 55%),
+        linear-gradient(135deg, rgba(2,6,23,.15), rgba(2,6,23,.05));
+    }
+    .articleInner{padding:22px 22px;}
+    .kicker{display:inline-flex;gap:8px;align-items:center;font-weight:950;font-size:12px;color:#0b1220;
+      padding:6px 10px;border-radius:999px;border:1px solid rgba(15,23,42,.10);background:rgba(255,255,255,.75);}
+    .kicker .dot{width:8px;height:8px;border-radius:999px;background:var(--accent1);}
+    h1{margin:14px 0 8px 0;font-size:34px;line-height:1.1;letter-spacing:-.03em;}
+    .meta{color:var(--muted);font-size:13.5px;font-weight:750;}
+    .body p{color:#334155;font-size:16px;line-height:1.75;margin:14px 0;}
+    .body h2{margin:22px 0 8px 0;font-size:18px;letter-spacing:-.01em;}
+    .sidebar .box{border-radius:20px;}
+    .label{font-size:12px;color:var(--muted);font-weight:950;letter-spacing:.02em;text-transform:uppercase;}
+    .adCard{border-radius:22px;overflow:hidden;}
+    .adImg{
+      height:120px;
+      background:
+        radial-gradient(420px 180px at 25% 30%, rgba(34,197,94,.35), transparent 55%),
+        radial-gradient(420px 180px at 75% 20%, rgba(59,130,246,.28), transparent 55%),
+        linear-gradient(135deg, rgba(2,6,23,.15), rgba(2,6,23,.05));
+    }
+    .adInner{padding:16px 16px;}
+    .adTitle{font-weight:950;font-size:16px;margin:6px 0 4px 0;}
+    .adCopy{color:#475569;font-size:13.5px;line-height:1.55;margin:0 0 12px 0;}
+    .cta{display:inline-block;padding:10px 12px;border-radius:14px;
+      background:linear-gradient(135deg, var(--accent1), var(--accent2));color:#fff;text-decoration:none;font-weight:950;}
+    .list a{display:block;text-decoration:none;color:#0b1220;font-weight:850;padding:10px 0;border-top:1px solid rgba(15,23,42,.08);}
+    .list a:first-child{border-top:none}
+    .field{display:flex;gap:10px;margin-top:10px}
+    .field input{
+      flex:1;border-radius:14px;border:1px solid rgba(15,23,42,.12);
+      padding:10px 12px;font-weight:650;outline:none;background:rgba(255,255,255,.85);
+    }
+    .field button{
+      border:none;border-radius:14px;padding:10px 12px;font-weight:950;color:#fff;
+      background:linear-gradient(135deg, var(--accent2), var(--accent3));
+      cursor:pointer;
+    }
+    .note{
+      margin-top:14px;color:var(--muted);font-size:12.5px;line-height:1.5;
+    }
+  
+    .productShot{
+      height:160px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(520px 220px at 25% 30%, rgba(34,197,94,.28), transparent 55%),
+        radial-gradient(520px 220px at 75% 20%, rgba(59,130,246,.22), transparent 55%),
+        linear-gradient(135deg, rgba(255,255,255,.70), rgba(255,255,255,.35));
+      border-bottom:1px solid rgba(15,23,42,.08);
+    }
+    .shotInner{
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:14px 0;
+    }
+
+    /* Override the advertisement image container so the Oura Ring blends seamlessly into the card.
+       Remove the gradient backgrounds, borders and fixed height from the productShot and
+       make the image fill the available width while maintaining its aspect ratio. */
+    .productShot{
+      background:none !important;
+      border-bottom:none !important;
+      height:auto !important;
+      padding:0 !important;
+      display:block;
+    }
+    .productShot .shotInner{
+      padding:0 !important;
+      display:block;
+    }
+    .productShot .shotInner img{
+      width:100% !important;
+      height:auto !important;
+      display:block;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="blogWrap">
+    <div class="blogTop">
+      <div class="blogBrand">
+        <span class="blogDot" aria-hidden="true"></span>
+        <span>Wellness Daily</span>
+      </div>
+      <div class="blogNav" aria-label="Primary navigation">
+        <a href="javascript:void(0)">Home</a>
+        <a href="javascript:void(0)">Sleep</a>
+        <a href="javascript:void(0)">Nutrition</a>
+        <a href="javascript:void(0)">Mental Health</a>
+        <a href="javascript:void(0)">Lifestyle</a>
+        <a href="javascript:void(0)">About</a>
+      </div>
+    </div>
+
+    <div class="layout">
+      <!-- Article -->
+      <div class="card articleCard">
+        <div class="hero" role="img" aria-label="Wellness blog header image"></div>
+        <div class="articleInner">
+          <div class="kicker"><span class="dot" aria-hidden="true"></span> WELLNESS</div>
+          <h1>5 Simple Habits That Improve Your Energy Throughout the Day</h1>
+          <div class="meta">4 min read</div>
+
+          <div class="body">
+            <p>
+              Staying energized throughout the day doesn’t require a complete lifestyle overhaul. Small, consistent habits
+              can make a meaningful difference in how you feel, focus, and perform, especially when your routines are easy
+              to maintain.
+            </p>
+
+            <h2>Morning routines that matter</h2>
+            <p>
+              Start with one predictable step that signals “the day has started,” a short walk, a light stretch, or a brief
+              planning moment. Consistency is more important than intensity.
+            </p>
+
+            <h2>Hydration and focus</h2>
+            <p>
+              Mild dehydration can contribute to fatigue and reduced concentration. Keeping water accessible and building
+              reminders into your routine can help you stay on track during busy days.
+            </p>
+
+            <h2>Small changes, big impact</h2>
+            <p>
+              Energy is cumulative. Small actions, like taking short breaks, eating balanced meals, and maintaining a steady
+              sleep schedule often add up to larger improvements over time.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="card box adCard">
+<div class="productShot" role="img" aria-label="Product image: Vitality Smart Oura Ring">
+  <div class="shotInner">
+    <img src="assets/oura_ring.webp" alt="Vitality Smart Oura Ring" style="width:120px;height:120px;">
+    <svg width="120" height="120" viewBox="0 0 120 120" aria-hidden="true" style="display:none;">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="rgba(34,197,94,0.55)"/>
+          <stop offset="1" stop-color="rgba(59,130,246,0.55)"/>
+        </linearGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="rgba(255,255,255,0.65)"/>
+          <stop offset="1" stop-color="rgba(255,255,255,0.20)"/>
+        </linearGradient>
+        <filter id="s" x="-30%" y="-30%" width="160%" height="160%">
+          <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="rgba(2,6,23,0.18)"/>
+        </filter>
+      </defs>
+
+      <!-- background blob -->
+      <circle cx="48" cy="44" r="34" fill="url(#g1)"></circle>
+      <circle cx="78" cy="72" r="26" fill="rgba(168,85,247,0.18)"></circle>
+
+      <!-- bottle -->
+      <g filter="url(#s)">
+        <rect x="52" y="22" width="16" height="10" rx="4" fill="rgba(15,23,42,0.70)"/>
+        <rect x="46" y="30" width="28" height="64" rx="14" fill="url(#g2)" stroke="rgba(15,23,42,0.18)" />
+        <rect x="50" y="40" width="20" height="38" rx="10" fill="rgba(59,130,246,0.14)"/>
+        <circle cx="60" cy="84" r="8" fill="rgba(34,197,94,0.18)"/>
+      </g>
+
+      <!-- subtle label -->
+      <text x="60" y="67" text-anchor="middle" font-size="10" font-weight="800" fill="rgba(15,23,42,0.65)">VITALITY</text>
+    </svg>
+  </div>
+</div>
+          <div class="adInner">
+            <div class="label">Sponsored&nbsp;Post</div>
+            <div class="adTitle">Vitality Smart Oura Ring</div>
+            <p class="adCopy">This lightweight ring tracks daily steps, water intake, heart rate, and sleep so you can stay on top of your wellness goals.</p>
+            <a class="cta" href="javascript:void(0)">Learn More</a>
+            <div class="note">Sponsored by Vitality+</div>
+          </div>
+        </div>
+
+        <div class="card box" style="margin-top:14px;">
+          <div class="cardpad">
+            <div class="label">Popular posts</div>
+            <div class="list" style="margin-top:8px;">
+              <a href="javascript:void(0)">How sleep affects productivity</a>
+              <a href="javascript:void(0)">A 10-minute morning stretch routine</a>
+              <a href="javascript:void(0)">Eating for sustained energy</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card box" style="margin-top:14px;">
+          <div class="cardpad">
+            <div class="label">Newsletter</div>
+            <div style="margin-top:8px;color:#334155;font-weight:750;">Get weekly wellness tips.</div>
+            <div class="field">
+              <input type="email" placeholder="Email address" aria-label="Email address">
+              <button type="button">Subscribe</button>
+            </div>
+            <div class="note">No spam. Unsubscribe anytime.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

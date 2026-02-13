@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vitality+ (Beta)</title>
+  <link rel="stylesheet" href="./assets/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="notice">
+      <b>Participant instruction:</b> Please explore the app using the left navigation (Home, Privacy Settings, Data Policy, Explore). Then click <b>Continue to Website 2</b>.
+      <div class="small" style="margin-top:6px;">(This banner is optional—remove for a more “natural” experience.)</div>
+    </div>
+
+    <div class="frame" style="margin-top:12px;">
+      <div class="topbar">
+        <div class="brand">
+          <div class="logo">🌿</div>
+          <div>
+            <p class="title">Vitality+ (Beta)</p>
+            <p class="sub">Preview and evaluate the app design</p>
+          </div>
+        </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span class="chip">Beta Preview</span>
+          <span class="avatar" aria-hidden="true">TA</span>
+        </div>
+        
+</div>
+<div class="body">
+        <div class="nav" role="navigation" aria-label="App navigation">
+          <button type="button" class="navbtn" data-view="home" aria-current="page"><svg class="svgico" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Home</button>
+          <button type="button" class="navbtn" data-view="privacy"><svg class="svgico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 4v6c0 5-3.5 9.5-8 10-4.5-.5-8-5-8-10V6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 11a2.5 2.5 0 0 1 5 0v2H9.5z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9 13h6v7H9z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg> Privacy Settings</button>
+          <button type="button" class="navbtn" data-view="policy"><svg class="svgico" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3h7l3 3v15a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M14 3v4h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8 11h8M8 15h8M8 19h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Data Policy</button>
+          <button type="button" class="navbtn" data-view="explore"><svg class="svgico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.5-7 10-7 10z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M12 9v6M9 12h6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> Explore</button>
+          <div class="navhint">Tip: Click tabs to navigate.</div>
+        </div>
+
+        <div class="main">
+          <section id="vx-home" class="view">
+            <h2 class="h1">Welcome</h2>
+            <p class="p">Vitality+ helps users track activity, sleep, nutrition, and stress while offering wellness insights and recommendations.</p>
+            <p class="p muted">This is a beta preview. Explore the tabs to see how the app handles privacy controls and data-use information.</p>
+            <div class="grid">
+              <div class="card"><h3>🏃 Daily Activity</h3><p>Steps, activity minutes, and weekly progress.</p></div>
+              <div class="card"><h3>😴 Sleep Insights</h3><p>Trends, recovery tips, and routines.</p></div>
+              <div class="card"><h3>🧘 Guided Meditation</h3><p>Short sessions for stress and focus.</p></div>
+              <div class="card"><h3>🥗 Nutrition Tips</h3><p>Simple daily suggestions and tracking.</p></div>
+            </div>
+          </section>
+
+          <section id="vx-privacy" class="view" style="display:none;">
+            <h2 class="h1">Privacy Settings</h2>
+            <p class="p muted" id="privacyIntro"></p>
+            <div class="card" id="privacyCard"></div>
+            <div class="btnrow">
+              <button class="btn" id="saveBtn" type="button">Save</button>
+            </div>
+          </section>
+
+          <section id="vx-policy" class="view" style="display:none;">
+            <h2 class="h1">Data Policy</h2>
+            <p class="p muted" id="policyIntro"></p>
+            <div class="card" id="policyCard"></div>
+          </section>
+
+          <section id="vx-explore" class="view" style="display:none;">
+            <h2 class="h1">Explore</h2>
+            <p class="p muted">Preview a sample content feed.</p>
+            <div class="card">
+              <h3 style="font-size:15px;">Wellness feed</h3>
+              <p class="p">Today’s tip: Try a 10-minute walk break and a consistent bedtime for better energy.</p>
+              <hr class="hr">
+              <p class="p small">This section is neutral filler to make the prototype feel realistic.</p>
+            </div>
+            <div class="btnrow">
+              <a class="btn primary" id="toBlog" href="./blog.html">Continue to Website 2</a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script src="./assets/utils.js"></script>
+  <script>
+    // Condition can be set by query params:
+    //   ?c=High|Low&t=High|Low
+    const customization = (qs("c","High") === "Low") ? "Low" : "High";
+    const transparency  = (qs("t","High") === "Low") ? "Low" : "High";
+// Carry condition to Website 2 link
+    const toBlog = document.getElementById("toBlog");
+    const u = new URL(toBlog.getAttribute("href"), window.location.href);
+    u.searchParams.set("c", customization);
+    u.searchParams.set("t", transparency);
+    toBlog.setAttribute("href", u.pathname.replace(/.*\//,"") + "?" + u.searchParams.toString());
+
+    // Privacy content
+    const privacyIntro = document.getElementById("privacyIntro");
+    const privacyCard  = document.getElementById("privacyCard");
+    const saveBtn      = document.getElementById("saveBtn");
+
+    function mkSwitch(id, checked, label, sub){
+      const safeId = id.replace(/[^a-z0-9_-]/gi,"");
+      return `
+        <div class="setting">
+          <div><b>${label}</b><span>${sub}</span></div>
+          <label class="switch">
+            <input id="${safeId}" type="checkbox" ${checked ? "checked" : ""}>
+            <span class="slider"></span>
+          </label>
+        </div>`;
+    }
+
+    if(customization === "High"){
+      privacyIntro.textContent = "Adjust how Vitality+ collects and uses your data. You can update settings anytime.";
+      privacyCard.innerHTML =
+        mkSwitch("s1", true,  "Collect step count and activity data", "Used to track progress and goals.") +
+        mkSwitch("s2", true,  "Collect sleep and heart-rate data",    "Used for sleep insights and recovery tips.") +
+        mkSwitch("s3", false, "Share de-identified activity data with partners", "May support analytics and ad measurement.") +
+        mkSwitch("s4", false, "Use app activity to personalize ads", "May tailor wellness ads based on your app behavior.") +
+        mkSwitch("s5", false, "Allow ads based on other apps/websites", "May combine data from other sources for ad targeting.") +
+        `<p class="small" style="margin-top:10px;">(Prototype preview for research. No real data is collected.)</p>`;
+      saveBtn.style.display = "";
+      saveBtn.onclick = ()=> showToast("Preferences saved");
+    } else {
+      privacyIntro.textContent = "These settings are managed automatically and cannot be modified.";
+      privacyCard.innerHTML = `
+        <p class="p">Vitality+ uses data automatically to support core app functions and provide relevant content.</p>
+        <hr class="hr">
+        <p class="p"><b>Data used may include:</b></p>
+        <ul style="margin:8px 0 0 18px; font-size:13px; color:#222;">
+          <li>Health and activity data</li>
+          <li>App usage data</li>
+          <li>Device information</li>
+          <li>Advertising identifiers</li>
+        </ul>
+        <p class="small" style="margin-top:10px;">Privacy preferences are not adjustable in this version of the app.</p>
+      `;
+      saveBtn.style.display = "none";
+    }
+
+    // Policy content
+    const policyIntro = document.getElementById("policyIntro");
+    const policyCard  = document.getElementById("policyCard");
+
+    if(transparency === "High"){
+      policyIntro.textContent = "Clear overview of what is collected, why it’s collected, and how it may be shared.";
+      policyCard.innerHTML = `
+        <p class="p"><b>What Vitality+ collects</b></p>
+        <ul style="margin:8px 0 0 18px; font-size:13px; color:#222;">
+          <li>Health and activity data you enter or generate</li>
+          <li>App usage behavior (e.g., features used, time spent)</li>
+          <li>Device and advertising identifiers</li>
+        </ul>
+        <hr class="hr">
+        <p class="p"><b>Why we collect this data</b></p>
+        <ul style="margin:8px 0 0 18px; font-size:13px; color:#222;">
+          <li>To provide personalized wellness insights</li>
+          <li>To improve app performance</li>
+          <li>To deliver relevant wellness advertisements</li>
+        </ul>
+        <hr class="hr">
+        <p class="p"><b>Third-party sharing</b></p>
+        <p class="p" style="font-size:13px;">
+          Vitality+ may share limited, <b>de-identified</b> data with advertising partners to display wellness-related ads.
+          We do <b>not</b> sell your name, email, or exact health records.
+        </p>
+        <hr class="hr">
+        <p class="p"><b>Your control</b></p>
+        <p class="p" style="font-size:13px;">You can review your choices in <b>Privacy Settings</b>.</p>
+        <p class="small">Questions? Contact privacy@vitalityplus.com</p>
+      `;
+    } else {
+      policyIntro.textContent = "General policy statement with limited detail.";
+      policyCard.innerHTML = `
+        <p class="p" style="font-size:13px;">
+          Vitality+ collects information to operate and improve its services.
+          Information may be used for analytics, personalization, and marketing purposes.
+        </p>
+        <p class="p" style="font-size:13px;">
+          Data may be shared with partners as permitted by law.
+        </p>
+        <p class="p" style="font-size:13px;">
+          By using Vitality+, you agree to this policy.
+        </p>
+      `;
+    }
+
+    // Navigation
+    navSetup();
+  </script>
+</body>
+</html>
